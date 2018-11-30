@@ -1,0 +1,25 @@
+{
+  "coverageReporters": [
+    "lcov"
+  ],
+  "collectCoverageFrom": [
+    "<rootDir>/src/**/*.ts",
+    "<rootDir>/src/**/*.tsx",
+    "!<rootDir>/src/index.tsx",
+    "!<rootDir>/src/**/*.d.ts",
+    "!<rootDir>/src/**/*.e2e.ts",
+    "!<rootDir>/src/**/*.e2e.driver.ts",
+    "!<rootDir>/node_modules/"
+  ],
+  "coverageThreshold": {
+    "global": {
+      "branches": 100,
+      "functions": 100,
+      "lines": 100,
+      "statements": 100
+    }
+  },
+  "snapshotSerializers": [
+    "enzyme-to-json/serializer"
+  ]
+}

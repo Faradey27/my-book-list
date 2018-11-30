@@ -1,0 +1,36 @@
+{
+  "extends": [
+    "tslint:latest",
+    "tslint-react",
+    "tslint-eslint-rules",
+    "tslint-config-prettier"
+  ],
+  "rules": {
+    "no-submodule-imports": false,
+    "no-implicit-dependencies": false,
+    "no-console": [true, "log"],
+    "no-var-requires": false,
+    "interface-name": false,
+    "no-namespace": false,
+    "no-internal-module": false,
+    "jsx-boolean-value": false,
+    "member-ordering": [
+      true,
+      {
+        "order": [
+          "private-static-field",
+          "public-static-field",
+          "private-constructor",
+          "public-constructor",
+          "private-instance-field",
+          "public-instance-field",
+          "private-constructor",
+          "public-constructor",
+          "public-instance-method",
+          "protected-instance-method",
+          "private-instance-method"
+        ]
+      }
+    ]
+  }
+}
