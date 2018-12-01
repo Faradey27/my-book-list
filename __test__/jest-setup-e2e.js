@@ -6,8 +6,8 @@ module.exports = async function globalSetup() {
   }
   await setupDevServer({
     launchTimeout: 90000,
-    command: 'npm run start',
-    port: 3000,
+    command: 'serve -s build', // you need to build before
+    port: 5000,
     usedPortAction: 'ignore',
   });
 };
