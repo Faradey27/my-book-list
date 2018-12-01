@@ -12,7 +12,18 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "preserve"
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "removeComments": false,
+    "preserveConstEnums": true,
+    "sourceMap": true,
+    "jsx": "preserve",
+    "types": ["node", "jest"],
+    "lib": [
+      "dom",
+      "es2015",
+      "es2016"
+    ]
   },
   "include": [
     "src"
