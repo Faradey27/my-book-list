@@ -13,4 +13,4 @@ jobs:
       - run: npm run build
       - run: npm run test:ci
       - run: npm run test:e2e
-      - run: ./node_modules/.bin/serve -s build | (npm run test:performance && ./node_modules/.bin/kill-port 5000)
+      - run: node ./__test__/performance.js
