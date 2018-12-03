@@ -5,6 +5,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "lint": "tslint -c tslint.json -p tsconfig.json",
     "test": "react-scripts test",
     "test:ci": "CI=true npm test -- --coverage",
     "test:e2e": "jest -c ./jest.e2e.config.json --detectOpenHandles -i --forceExit",
@@ -31,6 +32,10 @@
     "puppeteer": "^1.11.0",
     "pwmetrics": "^4.1.1",
     "serve": "^10.1.1",
+    "tslint": "^5.11.0",
+    "tslint-config-prettier": "^1.16.0",
+    "tslint-eslint-rules": "^5.4.0",
+    "tslint-react": "^3.6.0",
     "ts-jest": "^23.10.5",
     "typescript": "^3.1.6"
   },
