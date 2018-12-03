@@ -14,6 +14,7 @@
     "no-namespace": false,
     "no-internal-module": false,
     "jsx-boolean-value": false,
+    "object-literal-sort-keys": false,
     "member-ordering": [
       true,
       {
