@@ -1,10 +1,10 @@
-import RootDriver from './Root.driver';
+import HomeDriver from './Home.driver';
 
-describe('Root Page', () => {
-  let driver: RootDriver;
+describe('Home Page', () => {
+  let driver: HomeDriver;
 
   beforeEach(() => {
-    driver = new RootDriver();
+    driver = new HomeDriver();
   });
 
   it('should render correctly', () => {

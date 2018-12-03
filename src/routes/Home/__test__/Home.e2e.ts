@@ -1,20 +1,20 @@
 import Browser from '../../../../__test__/Browser';
-import RootDriver from './Root.e2e.driver';
+import HomeDriver from './Home.e2e.driver';
 
 const browser = new Browser();
 
-describe('Root Page', () => {
+describe('Home Page', () => {
   beforeAll(browser.launch);
   afterAll(browser.close);
 
-  let driver: RootDriver;
+  let driver: HomeDriver;
 
   beforeEach(async () => {
-    driver = new RootDriver({ browser });
+    driver = new HomeDriver({ browser });
     await driver.when.loaded();
   });
 
-  it('Should show root page', async () => {
+  it('Should show home page', async () => {
     expect(await driver.is.ok()).toBeTruthy();
   });
 });

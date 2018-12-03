@@ -16,8 +16,11 @@ export default class HomeDriver {
 
   public is = {
     ok: () => {
-      const page = this.browser && this.browser.getPage();
-      return page && page.waitForSelector('[data-testid="root"]');
-    }
+      const page = this.browser.getPage();
+      if (!page) {
+        throw new Error('Missed browser');
+      }
+      return page.waitForSelector('[data-testid="home-page"]')
+    },
   };
 }
