@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Provider } from 'react-redux';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-import * as serviceWorker from './serviceWorker';
 import store from './data';
 import Home from './routes/Home';
+import * as serviceWorker from './serviceWorker';
 
 const Root = () => (
   <Provider store={store}>
