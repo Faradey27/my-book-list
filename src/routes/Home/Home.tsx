@@ -1,13 +1,12 @@
 import React from 'react';
 
-class Home extends React.Component<any> {
-  public render() {
-    return (
-      <div data-testid="home-page">
-        {'Home page'}
-      </div>
-    );
-  }
-}
+import Header from '../../components/Header';
+
+const Home = () => (
+  <div data-testid="home-page">
+    <Header />
+    {'Home page'}
+  </div>
+);
 
 export default Home;

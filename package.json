@@ -12,6 +12,8 @@
     "test:performance": "pwmetrics --config=pwmetrics-config.js"
   },
   "dependencies": {
+    "@material-ui/core": "^3.6.1",
+    "@material-ui/icons": "^3.0.1",
     "@rematch/core": "^1.0.0-beta.4",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
