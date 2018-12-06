@@ -5,7 +5,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "build:locale": "tsc && react-intl-cra 'src/**/*.{ts,tsx}' -o 'src/i18n/messages/messages.json'",
+    "build:locale": "tsc -p tsconfig.locale.json && react-intl-cra 'src/**/*.{ts,tsx}' -o 'src/i18n/messages/messages.json'",
     "lint": "tslint -c tslint.json -p tsconfig.json",
     "test": "react-scripts test",
     "test:ci": "CI=true npm test -- --coverage",
