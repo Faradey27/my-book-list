@@ -3,19 +3,22 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
+import I18nProvider from './i18n';
 import store from './data';
 import Home from './routes/Home';
 import * as serviceWorker from './serviceWorker';
 
 const Root = () => (
-  <Provider store={store}>
-    <Router>
-      <Switch>
-        <Route path="/" exact component={Home} />
-        <Route path="/home" exact component={Home} />
-      </Switch>
-    </Router>
-  </Provider>
+  <I18nProvider>
+    <Provider store={store}>
+      <Router>
+        <Switch>
+          <Route path="/" exact component={Home} />
+          <Route path="/home" exact component={Home} />
+        </Switch>
+      </Router>
+    </Provider>
+  </I18nProvider>
 );
 
 ReactDOM.render(<Root />, document.getElementById('root'));

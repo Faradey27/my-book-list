@@ -1,4 +1,5 @@
 import React from 'react';
+import { defineMessages, InjectedIntlProps, injectIntl } from 'react-intl';
 
 import { createStyles, Theme, withStyles, WithStyles } from '@material-ui/core/styles';
 import { fade } from '@material-ui/core/styles/colorManipulator';
@@ -11,12 +12,19 @@ interface ISearchProps extends WithStyles<typeof styles> {
   onSearchSubmit?: (value: string) => void;
 };
 
-const Search = ({ classes, onSearch, onSearchSubmit }: ISearchProps ) => {
+const messages = defineMessages({
+  search: {
+    id: 'header.search',
+    defaultMessage: 'Search ...',
+  },
+});
+
+const Search = ({ classes, onSearch, onSearchSubmit, intl }: ISearchProps & InjectedIntlProps ) => {
   const onChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => onSearch && onSearch(e.target.value);
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = (e: any) => {
     e.preventDefault();
     if (onSearchSubmit) {
-      onSearchSubmit((e.target as any).search.value);
+      onSearchSubmit(e.target.search.value);
     }
   };
 
@@ -27,7 +35,7 @@ const Search = ({ classes, onSearch, onSearchSubmit }: ISearchProps ) => {
       </div>
       <InputBase
         name="search"
-        placeholder="Search…"
+        placeholder={intl.formatMessage(messages.search)}
         classes={{
           root: classes.inputRoot,
           input: classes.inputInput,
@@ -83,4 +91,4 @@ const styles = (theme: Theme) => createStyles({
   },
 });
 
-export default withStyles(styles)(Search);
+export default withStyles(styles)(injectIntl(Search));

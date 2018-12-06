@@ -19,19 +19,15 @@
     "sourceMap": true,
     "experimentalDecorators": true,
     "jsx": "preserve",
-    "types": ["node", "jest"],
+    "types": [
+      "node",
+      "jest"
+    ],
     "lib": [
       "dom",
       "es2015",
       "es2016"
-    ],
-    "baseUrl": ".",
-    "paths": {
-      "@material-ui/core": ["./material-ui/src"],
-      "@material-ui/core/*": ["./material-ui/src/*"],
-      "@material-ui/lab": ["./material-ui-lab/src"],
-      "@material-ui/lab/*": ["./material-ui-lab/src/*"]
-    }
+    ]
   },
   "include": [
     "src"
