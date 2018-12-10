@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-import I18nProvider from './i18n';
 import store from './data';
+import I18nProvider from './i18n';
 import Home from './routes/Home';
 import * as serviceWorker from './serviceWorker';
 

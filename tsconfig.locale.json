@@ -2,6 +2,7 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "build/dist",
+    "isolatedModules": false,
   },
   "include": [
     "src/**/*.ts",

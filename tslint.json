@@ -5,6 +5,11 @@
     "tslint-eslint-rules",
     "tslint-config-prettier"
   ],
+  "linterOptions": {
+    "exclude": [
+      "**/*.json"
+    ]
+  },
   "rules": {
     "no-submodule-imports": false,
     "no-implicit-dependencies": false,
