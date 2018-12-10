@@ -2,13 +2,14 @@ import { mount, ReactWrapper } from 'enzyme';
 import React from 'react';
 
 import Home from './../index';
+import mockedBooks from './books.mock.json';
 
 export default class HomeDriver {
   private component?: ReactWrapper;
 
   public when = {
     created: () => {
-      this.component = mount(<Home />);
+      this.component = mount(<Home books={mockedBooks}/>);
       return this;
     },
   };

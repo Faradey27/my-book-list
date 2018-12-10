@@ -21,7 +21,7 @@ interface IHeaderProps extends WithStyles<typeof styles> {
 
 const Header = ({ classes, onSearch, onSearchSubmit, onProfileClick }: IHeaderProps) => (
   <div className={classes.root}>
-    <AppBar position="static">
+    <AppBar position="fixed" className={classes.appBar}>
       <Toolbar>
         <IconButton className={classes.menuButton} color="inherit" aria-label="Open drawer">
           <MenuIcon />
@@ -43,6 +43,9 @@ const Header = ({ classes, onSearch, onSearchSubmit, onProfileClick }: IHeaderPr
 const styles = (theme: Theme) => createStyles({
   root: {
     width: '100%',
+  },
+  appBar: {
+    boxShadow: 'none'
   },
   grow: {
     flexGrow: 1,
