@@ -5,7 +5,6 @@ import Header from '../../components/Header';
 import { IBook } from '../../entities';
 
 import { createStyles, withStyles, WithStyles } from '@material-ui/core/styles';
-import mockedBooks from './__test__/books.mock.json';
 
 interface IHomeProps extends WithStyles<typeof styles> {
   books: IBook[];
@@ -50,9 +49,5 @@ const styles = () => createStyles({
     height: `calc(100vh - ${HEADER_HEIGHT}px)`
   }
 })
-
-Home.defaultProps = {
-  books: mockedBooks
-}
 
 export default withStyles(styles)(Home);
