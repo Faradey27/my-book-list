@@ -1,11 +1,11 @@
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
 
-import { Routes } from './routes/routes';
+import { BookRoutes } from './features/books';
 
 class App {
   public app: express.Application;
-  public router: Routes = new Routes();
+  public router: BookRoutes = new BookRoutes();
 
   constructor() {
     this.app = express();
