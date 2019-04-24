@@ -1,15 +1,14 @@
-import express from 'express';
 import compression from 'compression';
-import next from 'next'
-import path from 'path'
+import express from 'express';
+import next from 'next';
+import path from 'path';
 
-const port = parseInt(process.env.PORT || '3000', 10)
-const dev = process.env.NODE_ENV !== 'production'
-const app = next({ dev, dir: path.join(__dirname, '..') }) // path to .next folder after prod build phase
-const handleRoutes = app.getRequestHandler()
+const port = parseInt(process.env.PORT || '3000', 10);
+const dev = process.env.NODE_ENV !== 'production';
+const app = next({ dev, dir: path.join(__dirname, '..') }); // path to .next folder after prod build phase
+const handleRoutes = app.getRequestHandler();
 
-app.prepare()
-.then(() => {
+app.prepare().then(() => {
   const server = express();
   if (!dev) {
     server.use(compression());
@@ -40,4 +39,4 @@ app.prepare()
     }
     console.info(`> Ready on http://localhost:${port}`);
   });
-})
+});

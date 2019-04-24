@@ -6,8 +6,8 @@
     "dev": "ts-node --project tsconfig.server.json src/server/index.ts",
     "build": "rm -rf src/.next && next build src && tsc && tsc --project tsconfig.server.json",
     "start": "cross-env NODE_ENV=production node src/.next",
-    "lint": "prettier --check \"src/**/*.{ts,tsx}\" && tslint",
-    "prettier": "prettier --write \"src/**/*.{ts,tsx}\" && tslint --fix",
+    "lint": "prettier --check \"src/**/*.{ts,tsx}\" && tslint --project tsconfig.json && tslint --project tsconfig.server.json",
+    "prettier": "prettier --write \"src/**/*.{ts,tsx}\" && tslint --project tsconfig.json --fix && tslint --project tsconfig.server.json --fix",
     "test": ""
   },
   "dependencies": {
@@ -32,6 +32,9 @@
     "ts-node": "^8.1.0",
     "ts-node-dev": "^1.0.0-pre.32",
     "tslint": "^5.16.0",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-eslint-rules": "^5.4.0",
+    "tslint-react": "^4.0.0",
     "typescript": "^3.4.5"
   }
 }
