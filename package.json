@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "ts-node --project tsconfig.server.json src/server/index.ts",
     "build": "rm -rf src/.next && next build src && tsc && tsc --project tsconfig.server.json",
-    "start": "cross-env NODE_ENV=production node src/.next",
+    "start": "NODE_ENV=production node src/.next",
     "lint": "prettier --check \"src/**/*.{ts,tsx}\" && tslint --project tsconfig.json && tslint --project tsconfig.server.json",
     "prettier": "prettier --write \"src/**/*.{ts,tsx}\" && tslint --project tsconfig.json --fix && tslint --project tsconfig.server.json --fix",
     "test": ""
@@ -27,7 +27,6 @@
     "@types/next": "^8.0.4",
     "@types/node": "^11.13.7",
     "@types/react": "^16.8.14",
-    "cross-env": "^5.2.0",
     "prettier": "^1.17.0",
     "ts-node": "^8.1.0",
     "ts-node-dev": "^1.0.0-pre.32",
