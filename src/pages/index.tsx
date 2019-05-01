@@ -1,5 +1,2 @@
 import '../styles/install';
-
-import BookCard from '../components/BookCard';
-
-export default () => <BookCard />;
+export { default } from './home';

@@ -39,6 +39,14 @@ class MyDocument extends Document<{
             rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Roboto:300,400,500"
           />
+          <style>{`
+            html {
+              height: 100%;
+            }
+            html body {
+              background-image: linear-gradient(to bottom, #689AD5 , #486AB0);
+            }
+          `}</style>
         </Head>
         <body>
           <Main />
