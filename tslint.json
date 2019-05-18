@@ -15,6 +15,7 @@
     "no-internal-module": false,
     "jsx-boolean-value": false,
     "object-literal-sort-keys": false,
+    "jsx-no-lambda": false,
     "member-ordering": [
       true,
       {

@@ -9,24 +9,24 @@ import { makeStyles } from '@material-ui/styles';
 const messages = defineMessages({
   bestForYou: {
     id: 'navigation.text.bestForYou',
-    defaultMessage: 'Best for you'
+    defaultMessage: 'Best for you',
   },
   top: {
     id: 'navigation.text.top',
-    defaultMessage: 'Top'
+    defaultMessage: 'Top',
   },
   bestSellers: {
     id: 'navigation.text.bestSellers',
-    defaultMessage: 'Best sellers'
+    defaultMessage: 'Best sellers',
   },
   special: {
     id: 'navigation.text.special',
-    defaultMessage: 'Special'
+    defaultMessage: 'Special',
   },
   mustRead: {
     id: 'navigation.text.special',
-    defaultMessage: 'Must read'
-  }
+    defaultMessage: 'Must read',
+  },
 });
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -40,18 +40,18 @@ const useStyles = makeStyles((theme: Theme) => ({
     alignItems: 'flex-start',
     overflowX: 'auto',
     paddingLeft: 6,
-    height: 43
+    height: 43,
   },
   button: {
     whiteSpace: 'nowrap',
-    flexShrink: 0
+    flexShrink: 0,
   },
   buttonLabel: {
     color: theme.palette.white,
-    opacity: 0.4
+    opacity: 0.4,
   },
   activeButtonLabel: {
-    opacity: 1
+    opacity: 1,
   },
 }));
 
@@ -81,20 +81,20 @@ const Navigation = ({ selectedId }: INavigationProps) => {
   return (
     <div className={classes.root}>
       <div className={classes.content}>
-        {
-          buttons.map(button => (
-            <Button className={classes.button} key={button.id}>
-              <Typography
-                className={classNames(classes.buttonLabel, { [classes.activeButtonLabel]: selectedId === button.id })}
-              >
-                <FormattedMessage {...button.label} />
-              </Typography>
-            </Button>
-          ))
-        }
+        {buttons.map(button => (
+          <Button className={classes.button} key={button.id}>
+            <Typography
+              className={classNames(classes.buttonLabel, {
+                [classes.activeButtonLabel]: selectedId === button.id,
+              })}
+            >
+              <FormattedMessage {...button.label} />
+            </Typography>
+          </Button>
+        ))}
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default Navigation;

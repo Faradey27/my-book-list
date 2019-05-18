@@ -11,15 +11,18 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const BookCard = () => {
+interface IBook {
+  avatar: string;
+}
+
+interface IBookCardProps {
+  book: IBook;
+}
+
+const BookCard = ({ book }: IBookCardProps) => {
   const classes = useStyles();
 
-  return (
-    <img
-      className={classes.root}
-      src="https://images.gr-assets.com/books/1534627688l/41217441.jpg"
-    />
-  );
+  return <img className={classes.root} src={book.avatar} />;
 };
 
 export default BookCard;

@@ -9,8 +9,8 @@ import { makeStyles } from '@material-ui/styles';
 const messages = defineMessages({
   title: {
     id: 'headerBar.title.recommendation',
-    defaultMessage: 'Recommendations'
-  }
+    defaultMessage: 'Recommendations',
+  },
 });
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     color: theme.palette.white,
   },
   button: {
-    color: theme.palette.white
+    color: theme.palette.white,
   },
 }));
 
@@ -42,7 +42,7 @@ const HeaderBar = () => {
         <SearchIcon />
       </IconButton>
     </div>
-  )
-}
+  );
+};
 
 export default HeaderBar;
