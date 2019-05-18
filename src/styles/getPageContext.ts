@@ -6,16 +6,19 @@ import { GenerateClassName, SheetsRegistry } from 'jss';
 declare module '@material-ui/core/styles/createPalette' {
   interface Palette {
     main: string;
+    white: string;
   }
 
   interface PaletteOptions {
     main: string;
+    white: string;
   }
 }
 
 const theme = createMuiTheme({
   palette: {
     main: '#486AB0',
+    white: '#ffffff',
   },
   typography: {
     useNextVariants: true,

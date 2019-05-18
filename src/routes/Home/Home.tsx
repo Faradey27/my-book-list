@@ -1,12 +1,17 @@
 import { makeStyles } from '@material-ui/styles';
+
 import BookCard from '../../components/BookCard';
+import HeaderBar from '../../components/HeaderBar';
+import Navigation, { navigationPages } from '../../components/Navigation';
+import RootLayout from '../../layouts/RootLayout';
 
 const Home = () => {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
-      <div className={classes.header} />
+    <RootLayout>
+      <HeaderBar />
+      <Navigation selectedId={navigationPages.bestForYou} />
       <div className={classes.content}>
         <div className={classes.card}>
           <BookCard />
@@ -18,7 +23,7 @@ const Home = () => {
           <BookCard />
         </div>
       </div>
-    </div>
+    </RootLayout>
   );
 };
 
@@ -27,6 +32,8 @@ const useStyles = makeStyles(() => ({
   content: {
     display: 'flex',
     justifyContent: 'center',
+    width: '100vw',
+    overflowX: 'auto',
   },
   card: {
     margin: 12,
@@ -40,3 +47,4 @@ const useStyles = makeStyles(() => ({
 }));
 
 export default Home;
+// 475 height
