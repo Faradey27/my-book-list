@@ -11,6 +11,11 @@ const useStyles = makeStyles(() => ({
     alignItems: 'center',
     position: 'relative',
     transition: 'transform 0.8s',
+    transform: ((props: { activeCardIndex: number }) =>
+      `translateX(calc( ((100vw - 70%) / 2) - (70% * ${
+        props.activeCardIndex
+      })))`) as any,
+    maxWidth: 1200,
   },
 }));
 
@@ -30,53 +35,42 @@ const getCardType = (index: number, activeIndex: number) => {
 interface IBooksCarousel {
   activeIndex?: number;
   books: any[];
+  onIndexChange: (nextIndex: number) => void;
 }
 
-const BooksCarousel = ({ books, activeIndex = 0 }: IBooksCarousel) => {
-  const cardWidth = 224;
-  const offset =
-    typeof window !== 'undefined' ? (window.innerWidth - cardWidth) / 2 : 48;
-  const classes = useStyles();
-
-  const [activeCardIndex, setActiveCardIndex] = useState(activeIndex);
-  const [galerryOffset, setGalleryOffset] = useState(
-    offset - cardWidth * activeCardIndex
-  );
+const BooksCarousel = ({
+  books,
+  activeIndex = 0,
+  onIndexChange,
+}: IBooksCarousel) => {
+  const classes = useStyles({ activeCardIndex: activeIndex });
 
   const handleNewActiveIndex = useCallback(
     (index: number) => {
-      if (index < activeCardIndex) {
-        setGalleryOffset(galerryOffset + cardWidth);
+      if (index >= 0 && index < books.length) {
+        onIndexChange(index);
       }
-      if (index > activeCardIndex) {
-        setGalleryOffset(galerryOffset - cardWidth);
-      }
-      setActiveCardIndex(index);
     },
-    [activeCardIndex]
+    [activeIndex]
   );
 
   const handleSwipeRight = useCallback(
-    () => handleNewActiveIndex(activeCardIndex - 1),
-    [activeCardIndex]
+    () => handleNewActiveIndex(activeIndex - 1),
+    [activeIndex]
   );
   const handleSwipeLeft = useCallback(
-    () => handleNewActiveIndex(activeCardIndex + 1),
-    [activeCardIndex]
+    () => handleNewActiveIndex(activeIndex + 1),
+    [activeIndex]
   );
 
   return (
     <Swipe onSwipeRight={handleSwipeRight} onSwipeLeft={handleSwipeLeft}>
-      <div
-        style={{ transform: `translateX(${galerryOffset}px)` }}
-        className={classes.root}
-      >
+      <div className={classes.root}>
         {books.map((book, index) => (
           <BooksCarouselCard
-            width={cardWidth}
             key={book.id}
             index={index}
-            type={getCardType(index, activeCardIndex)}
+            type={getCardType(index, activeIndex)}
             book={book}
             onClick={handleNewActiveIndex}
           />

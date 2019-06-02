@@ -1,3 +1,7 @@
+import { useCallback } from 'react';
+
+import { RouterProps, withRouter } from 'next/router';
+
 import { makeStyles } from '@material-ui/styles';
 
 import BooksCarousel from '../../components/BooksCarousel';
@@ -46,15 +50,27 @@ const cards = [
   },
 ];
 
-const Home = () => {
+interface IHomeProps {
+  router: RouterProps;
+}
+
+const Home = ({ router }: IHomeProps) => {
   const classes = useStyles();
+  const handleIndexChange = useCallback((nextIndex: number) => {
+    router.push({ pathname: '/', query: { activeBookIndex: nextIndex } });
+  }, []);
+  const query = router.query || {};
 
   return (
     <RootLayout className={classes.root}>
       <HeaderBar />
       <Navigation selectedId={navigationPages.bestForYou} />
       <div className={classes.content}>
-        <BooksCarousel activeIndex={2} books={cards} />
+        <BooksCarousel
+          activeIndex={Number(query.activeBookIndex) || 2}
+          books={cards}
+          onIndexChange={handleIndexChange}
+        />
       </div>
     </RootLayout>
   );
@@ -64,10 +80,7 @@ const useStyles = makeStyles(() => ({
   root: {
     overflowX: 'hidden',
   },
-  content: {
-    marginTop: 12,
-  },
+  content: {},
 }));
 
-export default Home;
-// 475 height
+export default withRouter(Home);

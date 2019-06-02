@@ -7,7 +7,6 @@ import BookCard from '../BookCard';
 const useStyles = makeStyles(() => ({
   card: {
     position: 'relative',
-    height: 320,
     transform: 'scale(0.6) translateY(-2rem)',
     cursor: 'pointer',
     pointerEvents: 'none',
@@ -15,6 +14,7 @@ const useStyles = makeStyles(() => ({
     transition: 'transform 0.8s',
     zIndex: 1,
     flexShrink: 0,
+    width: '70%',
   },
   default: {
     opacity: 0,
@@ -50,17 +50,10 @@ interface IBooksCarousel {
   book: any;
   type: CardType;
   index: number;
-  width: number;
   onClick: (index: number) => void;
 }
 
-const BooksCarousel = ({
-  book,
-  width,
-  type,
-  index,
-  onClick,
-}: IBooksCarousel) => {
+const BooksCarousel = ({ book, type, index, onClick }: IBooksCarousel) => {
   const classes = useStyles();
   const handleCardClick = () => onClick(index);
 
@@ -68,7 +61,6 @@ const BooksCarousel = ({
     <div
       className={classNames(classes.card, { [classes[type]]: true })}
       onClick={handleCardClick}
-      style={{ width }}
     >
       <BookCard book={book} />
     </div>
