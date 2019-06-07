@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback } from 'react';
 import Swipe from 'react-easy-swipe';
 
 import { makeStyles } from '@material-ui/styles';
