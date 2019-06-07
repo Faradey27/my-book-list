@@ -12,9 +12,7 @@ const useStyles = makeStyles(() => ({
     position: 'relative',
     transition: 'transform 0.8s',
     transform: ((props: { activeCardIndex: number }) =>
-      `translateX(calc( ((100vw - 70%) / 2) - (70% * ${
-        props.activeCardIndex
-      })))`) as any,
+      `translateX(calc( ((100vw - 70%) / 2) - (70% * ${props.activeCardIndex})))`) as any,
     maxWidth: 1200,
   },
 }));
