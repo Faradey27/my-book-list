@@ -1,0 +1,15 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:11.9.0-browsers
+
+    working_directory: ~/my-book-list
+
+    steps:
+      - checkout
+
+      - run: npm install
+      - run: npm run lint
+      - run: npm run build
+      - run: npm run test
