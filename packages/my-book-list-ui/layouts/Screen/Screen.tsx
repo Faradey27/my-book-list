@@ -7,6 +7,7 @@ export const theme = {
   colors: {
     baseFontColor: '#111111',
     baseBackgroundColor: '#efefef',
+    accentColor: '#2196f3',
   },
 };
 
@@ -19,7 +20,14 @@ const Screen = ({ name, children }: IScreenProps) => {
           margin: 0;
           color: ${theme.colors.baseFontColor};
           font-size: 14px;
-          font-family: 'Montserrat', sans-serif;
+          font-family: Helvetica, system-ui;
+          line-height: 1.5;
+        }
+        h2 {
+          margin: 0;
+          font-family: Georgia, system-ui;
+          font-size: 22px;
+          font-weight: 700;
         }
         input {
           box-sizing: border-box;

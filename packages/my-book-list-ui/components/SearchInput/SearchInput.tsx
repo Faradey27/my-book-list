@@ -16,6 +16,7 @@ const SearchInput = ({ placeholder }: ISearchInputProps) => {
       <input
         id="search-input"
         placeholder={placeholder}
+        value={value}
         onChange={e => setValue(e.target.value)}
       />
       <label htmlFor="search-input">
@@ -23,6 +24,7 @@ const SearchInput = ({ placeholder }: ISearchInputProps) => {
       </label>
       <span
         className={value ? 'clear-search-input' : 'clear-search-input-hide'}
+        onClick={() => setValue('')}
       >
         <CloseIcon />
       </span>
@@ -60,8 +62,18 @@ const SearchInput = ({ placeholder }: ISearchInputProps) => {
           background: rgba(0, 0, 0, 0.12);
           margin-top: -12px;
           margin-right: 16px !important;
-          transition-duration: 0.1s;
           cursor: pointer;
+        }
+        span:before {
+          content: '';
+          position: absolute;
+          content: '';
+          left: 50%;
+          top: 50%;
+          width: 48px;
+          height: 48px;
+          margin-left: -24px;
+          margin-top: -24px;
         }
         span > :global(svg) {
           width: 16px;

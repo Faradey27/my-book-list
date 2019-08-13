@@ -7,6 +7,11 @@ const Block = ({ children }: IBlockProps) => (
     {children}
     <style jsx>{`
       .block-component {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: relative;
+
         margin: 32px 0;
         padding: 0 16px;
       }
