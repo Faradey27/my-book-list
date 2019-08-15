@@ -10,6 +10,9 @@ module.exports = withSourceMaps({
   webpack: (config, { isServer, buildId }) => {
     config.plugins.push(
       new webpack.DefinePlugin({
+        'process.env.FIREBASE_API_KEY': JSON.stringify(
+          process.env.FIREBASE_API_KEY
+        ),
         'process.env.SENTRY_RELEASE': JSON.stringify(buildId),
       })
     );

@@ -1,3 +1,5 @@
+import firebase from 'firebase/app';
+
 import Screen from '../../layouts/Screen';
 import { theme } from '../../layouts/Screen/Screen';
 
@@ -9,6 +11,7 @@ import Section from '../../components/Section';
 import AddIcon from '../../assets/icons/AddIcon';
 
 import { IBook } from '../../types';
+// import { useEffect } from 'react';
 
 const books: IBook[] = [
   {
@@ -49,6 +52,15 @@ const books: IBook[] = [
 ];
 
 const Home = () => {
+  // useEffect(() => {
+  //   const books = firebase.firestore().collection('books');
+  //   books.
+  //   books.onSnapshot(v => {
+  //     v.forEach(x => {
+  //       console.log(x.data());
+  //     });
+  //   });
+  // }, []);
   return (
     <Screen name="home">
       <Block>
