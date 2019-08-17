@@ -1,8 +1,3 @@
-require('dotenv').config();
-
-const path = require('path');
-const Dotenv = require('dotenv-webpack');
-
 const webpack = require('webpack');
 const withSourceMaps = require('@zeit/next-source-maps');
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
@@ -17,19 +12,10 @@ module.exports = withBundleAnalyzer(
           'process.env.FIREBASE_API_KEY': JSON.stringify(
             process.env.FIREBASE_API_KEY
           ),
+          'process.env.SENTRY_DSN': JSON.stringify(process.env.SENTRY_DSN),
           'process.env.SENTRY_RELEASE': JSON.stringify(buildId),
         })
       );
-
-      config.plugins = [
-        ...config.plugins,
-
-        // Read the .env file
-        new Dotenv({
-          path: path.join(__dirname, '.env.build'),
-          systemvars: true,
-        }),
-      ];
 
       if (!isServer) {
         config.resolve.alias['@sentry/node'] = '@sentry/browser';
