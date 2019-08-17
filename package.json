@@ -20,7 +20,5 @@
   "devDependencies": {
     "prettier": "^1.18.2"
   },
-  "dependencies": {
-    "next-helpers": "^1.0.0"
-  }
+  "dependencies": {}
 }
