@@ -1,7 +1,6 @@
 import App from 'next/app';
 
 import firebase from 'firebase/app';
-import 'firebase/database';
 import 'firebase/firestore';
 
 import sentry from '../utils/sentry';
