@@ -1,6 +1,4 @@
-import withSSR from 'next-helpers/dist/withSSR';
 import Link from 'next/link';
-import { useEffect, useReducer, useState } from 'react';
 
 import Screen from '../../layouts/Screen';
 import { theme } from '../../layouts/Screen/Screen';
@@ -11,9 +9,9 @@ import SearchInput from '../../components/SearchInput';
 import Section from '../../components/Section';
 
 import AddIcon from '../../assets/icons/AddIcon';
+import Spinner from '../../components/Spinner';
 import booksModel from '../../models/booksModel';
 import { IBook } from '../../types';
-import Spinner from '../../components/Spinner';
 
 // const books: IBook[] = [
 //   {
@@ -195,4 +193,4 @@ Home.getInitialProps = async () => {
   return props;
 };
 
-export default withSSR(Home);
+export default Home;
