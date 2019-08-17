@@ -2,15 +2,17 @@ import Image from '../Image';
 
 import { IBook } from '../../types';
 
-const BookCard = ({ name, avatar, authors, shortDescription }: IBook) => (
+const BookCard = ({ name, avatar, authors, annotation }: IBook) => (
   <div data-hook="bookCard-component" className="bookCard-component">
     <div className="book-image">
       <Image image={avatar} alt={name} />
     </div>
     <div className="book-info">
       <div className="book-name">{name}</div>
-      <div className="book-authors">{authors.join(', ')}</div>
-      <div className="book-shortDescription">{shortDescription}</div>
+      <div className="book-authors">
+        {authors.map(author => author.name).join(', ')}
+      </div>
+      <div className="book-annotation">{annotation}</div>
     </div>
     <style jsx>{`
       .bookCard-component {
@@ -35,7 +37,7 @@ const BookCard = ({ name, avatar, authors, shortDescription }: IBook) => (
         color: #757575;
         font-weight: 600;
       }
-      .book-shortDescription {
+      .book-annotation {
         color: #757575;
         margin-top: 10px;
         font-size: 13px;

@@ -44,6 +44,13 @@ const Screen = ({ name, children }: IScreenProps) => {
           font-size: inherit;
           color: inherit;
         }
+        a {
+          border: cnone;
+          outline: none;
+          text-decoration: none;
+          color: inherit;
+          -webkit-tap-highlight-color: none;
+        }
       `}</style>
     </div>
   );

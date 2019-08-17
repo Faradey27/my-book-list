@@ -5,8 +5,12 @@ export interface IImage {
 }
 
 export interface IBook {
+  id: string;
   name: string;
-  authors: string[];
-  shortDescription: string;
+  authors: { id: string; name: string }[];
+  annotation: string;
   avatar: IImage;
+  genres: { id: string; name: string }[];
+  yearOfPublication: number;
+  rating: number;
 }

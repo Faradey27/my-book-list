@@ -41,6 +41,7 @@
     "express": "^4.17.1",
     "firebase": "^6.3.5",
     "next": "^9.0.3",
+    "next-helpers": "^1.0.0",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "sentry-testkit": "^3.0.2",

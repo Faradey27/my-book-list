@@ -19,5 +19,8 @@
   "homepage": "https://github.com/Faradey27/my-book-list#readme",
   "devDependencies": {
     "prettier": "^1.18.2"
+  },
+  "dependencies": {
+    "next-helpers": "^1.0.0"
   }
 }
