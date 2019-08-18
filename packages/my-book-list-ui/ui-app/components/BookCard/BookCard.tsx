@@ -1,6 +1,6 @@
 import Image from '../Image';
 
-import { IBook } from '../../types';
+import { IBook } from '../../../types';
 
 const BookCard = ({ name, avatar, authors, annotation }: IBook) => (
   <div data-hook="bookCard-component" className="bookCard-component">

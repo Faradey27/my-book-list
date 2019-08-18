@@ -1,4 +1,4 @@
-import { IImage } from '../../types';
+import { IImage } from '../../../types';
 
 interface IImageProps {
   image: IImage;

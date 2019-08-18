@@ -1,9 +1,6 @@
 import App from 'next/app';
 
-import firebase from 'firebase/app';
-import 'firebase/firestore';
-
-import sentry from '../utils/sentry';
+import sentry from '../ui-app/utils/sentry';
 
 const { Sentry, captureException } = sentry();
 
@@ -59,17 +56,6 @@ class MyApp extends App {
       hasError: false,
       errorEventId: undefined,
     };
-    if (!firebase.apps.length) {
-      firebase.initializeApp({
-        apiKey: process.env.FIREBASE_API_KEY,
-        authDomain: 'mybooklist-972b5.firebaseapp.com',
-        databaseURL: 'https://mybooklist-972b5.firebaseio.com',
-        projectId: 'mybooklist-972b5',
-        storageBucket: '',
-        messagingSenderId: '44086550085',
-        appId: '1:44086550085:web:4eaa7ea2298bab85',
-      });
-    }
   }
 
   componentDidCatch(error: Error, errorInfo: any) {

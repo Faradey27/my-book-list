@@ -3,15 +3,16 @@ import Link from 'next/link';
 import Screen from '../../layouts/Screen';
 import { theme } from '../../layouts/Screen/Screen';
 
+import AddIcon from '../../assets/icons/AddIcon';
 import Block from '../../components/Block';
 import BookCard from '../../components/BookCard';
 import SearchInput from '../../components/SearchInput';
 import Section from '../../components/Section';
-
-import AddIcon from '../../assets/icons/AddIcon';
 import Spinner from '../../components/Spinner';
-import booksModel from '../../models/booksModel';
-import { IBook } from '../../types';
+
+import booksUISDK from '../../../be-app/books/booksUISDK';
+
+import { IBook } from '../../../types';
 
 // const books: IBook[] = [
 //   {
@@ -97,7 +98,7 @@ interface IHomeProps {
   state: States;
 }
 
-const Home = ({ books, state }: IHomeProps) => {
+const Home = ({ books, state, ...props }: IHomeProps) => {
   // const [state, dispatch] = useReducer<HomeReducer>(homeReducer, initialState);
 
   // useEffect(() => {
@@ -180,14 +181,21 @@ const Home = ({ books, state }: IHomeProps) => {
   );
 };
 
-Home.getInitialProps = async () => {
-  const props = await new Promise(resolve => {
-    booksModel
-      .fetchBooks()
-      .then(books => resolve({ books, state: States.success }))
-      .catch(() => resolve({ books: [], state: States.failure }));
+// TODO
+const getOrigin = (req: any) => {
+  let host = req ? req.headers.host : window.location.hostname;
+  let protocol = host.indexOf('localhost') > -1 ? 'http:' : 'https:';
+  return `${protocol}//${host}`;
+};
 
-    setTimeout(() => resolve({ books: [], state: States.loading }), 500);
+Home.getInitialProps = async (prop: any) => {
+  const props = await new Promise(resolve => {
+    booksUISDK
+      .fetchBooks({ origin: getOrigin(prop.req) })
+      .then(books => resolve({ books, state: States.success }))
+      .catch(error => resolve({ error, books: [], state: States.failure }));
+
+    setTimeout(() => resolve({ books: [], state: States.loading }), 1000);
   });
 
   return props;

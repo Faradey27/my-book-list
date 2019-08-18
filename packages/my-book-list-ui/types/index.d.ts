@@ -14,3 +14,9 @@ export interface IBook {
   yearOfPublication: number;
   rating: number;
 }
+
+export interface IFetchBooks {
+  orderBy?: keyof IBook;
+  startAt?: number;
+  limit?: number;
+}

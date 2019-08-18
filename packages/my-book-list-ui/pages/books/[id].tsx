@@ -1,1 +1,1 @@
-export { default } from '../../screens/BookPage';
+export { default } from '../../ui-app/screens/BookPage';
