@@ -18,6 +18,7 @@ import withDataLoader, { States } from '../../hocs/withDataLoader';
 import { getOrigin } from '../../utils/reqUtils';
 
 import { IBook } from '../../../types';
+import Router from 'next/router';
 
 // const books: IBook[] = [
 //   {
@@ -83,7 +84,12 @@ const Home = ({ payload, state }: IHomeProps) => {
           title={intl.formatMessage(messages.title, { count: payload.length })}
         >
           {payload.map(book => (
-            <Link href={`/books/${book.id}`} key={book.id}>
+            <Link
+              href="/books/[id]"
+              as={`/books/${book.id}`}
+              key={book.id}
+              shallow={true}
+            >
               <a className="book-layout">
                 <BookCard {...book} />
               </a>

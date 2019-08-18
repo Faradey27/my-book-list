@@ -1,1 +1,4 @@
-export default () => 'Book page';
+export default () => {
+  console.log('RENDER =============');
+  return 'Book page';
+};

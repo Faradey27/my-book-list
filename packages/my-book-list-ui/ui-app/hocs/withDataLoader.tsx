@@ -71,16 +71,19 @@ const withDataLoader = (
   };
 
   Loader.getInitialProps = async ({ req }: any) => {
+    const isServer = Boolean(req);
     const props = await new Promise(resolve => {
-      loader(req)
-        .then(payload => resolve({ payload, state: States.success }))
-        .catch(error =>
-          resolve({ error, payload: defaultPayload, state: States.failure })
-        );
+      if (isServer) {
+        loader(req)
+          .then(payload => resolve({ payload, state: States.success }))
+          .catch(error =>
+            resolve({ error, payload: defaultPayload, state: States.failure })
+          );
+      }
 
       setTimeout(
         () => resolve({ payload: defaultPayload, state: States.loading }),
-        maxSSRWaitTime
+        isServer ? maxSSRWaitTime : 0
       );
     });
 
