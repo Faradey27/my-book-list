@@ -12,6 +12,9 @@ import Spinner from '../../components/Spinner';
 
 import booksUISDK from '../../../be-app/books/booksUISDK';
 
+import withDataLoader, { States } from '../../hocs/withDataLoader';
+import { getOrigin } from '../../utils/reqUtils';
+
 import { IBook } from '../../../types';
 
 // const books: IBook[] = [
@@ -29,17 +32,6 @@ import { IBook } from '../../../types';
 //   },
 //   {
 //     avatar: {
-//       src: 'http://www.opencourtbooks.com/images/1984.jpg',
-//       width: 100,
-//       height: 150,
-//     },
-//     authors: ['Джордж Оруэлл'],
-//     name: '1984',
-//     shortDescription:
-//       'Джордж Оруэлл (настоящее имя — Эрик А. Блэр), писатель острого, иронического ума, за свою недолгую жизнь создал множество произведений, из которых в нашей стране наиболее известны повесть-притча «Скотный двор» и знаменитый, ставший итогом жизненного и творческого пути своего создателя роман-антиутопия «1984», вошедший в данное издание.',
-//   },
-//   {
-//     avatar: {
 //       src:
 //         'https://img.yakaboo.ua/media/catalog/product/cache/1/image/398x565/234c7c011ba026e66d29567e1be1d1f7/c/o/cover1_1__4_18.jpg',
 //       width: 100,
@@ -52,80 +44,12 @@ import { IBook } from '../../../types';
 //   },
 // ];
 
-enum States {
-  idle = 'idle',
-  loading = 'loading',
-  success = 'success',
-  failure = 'failure',
-  empty = 'empty',
-}
-
-enum Actions {
-  SET_BOOKS = 'SET_BOOKS',
-  SET_STATE = 'SET_STATE',
-}
-
-interface IHomeAction {
-  type: States | Actions;
-  payload?: any;
-}
-
-type HomeReducer = (state: IHomeState, action: IHomeAction) => IHomeState;
-
-interface IHomeState {
-  books: IBook[];
-  currentState: States;
-}
-
-const initialState: IHomeState = {
-  books: [],
-  currentState: States.idle,
-};
-
-const homeReducer = (state: IHomeState, action: IHomeAction) => {
-  switch (action.type) {
-    case Actions.SET_BOOKS:
-      return { ...state, books: action.payload };
-    case Actions.SET_STATE:
-      return { ...state, currentState: action.payload };
-    default:
-      return state;
-  }
-};
-
 interface IHomeProps {
-  books: IBook[];
+  payload: IBook[];
   state: States;
 }
 
-const Home = ({ books, state, ...props }: IHomeProps) => {
-  // const [state, dispatch] = useReducer<HomeReducer>(homeReducer, initialState);
-
-  // useEffect(() => {
-  //   let didCancel = false;
-  //   const fetchBooks = async () => {
-  //     try {
-  //       dispatch({ type: Actions.SET_STATE, payload: States.loading });
-  //       const booksList = await booksModel.fetchBooks();
-
-  //       if (!didCancel) {
-  //         dispatch({ type: Actions.SET_BOOKS, payload: booksList });
-  //         dispatch({ type: Actions.SET_STATE, payload: States.success });
-  //       }
-  //     } catch (e) {
-  //       if (!didCancel) {
-  //         dispatch({ type: Actions.SET_STATE, payload: States.failure });
-  //       }
-  //     }
-  //   };
-
-  //   fetchBooks();
-
-  //   return () => {
-  //     didCancel = true;
-  //   };
-  // }, []);
-
+const Home = ({ payload, state }: IHomeProps) => {
   return (
     <Screen name="home">
       <Block>
@@ -139,8 +63,8 @@ const Home = ({ books, state, ...props }: IHomeProps) => {
       {state === States.loading ? (
         <Spinner />
       ) : (
-        <Section title={`${books.length} Books`}>
-          {books.map(book => (
+        <Section title={`${payload.length} Books`}>
+          {payload.map(book => (
             <Link href={`/books/${book.id}`} key={book.id}>
               <a className="book-layout">
                 <BookCard {...book} />
@@ -149,7 +73,6 @@ const Home = ({ books, state, ...props }: IHomeProps) => {
           ))}
         </Section>
       )}
-
       <style jsx>{`
         div {
           width: 100%;
@@ -181,24 +104,8 @@ const Home = ({ books, state, ...props }: IHomeProps) => {
   );
 };
 
-// TODO
-const getOrigin = (req: any) => {
-  let host = req ? req.headers.host : window.location.hostname;
-  let protocol = host.indexOf('localhost') > -1 ? 'http:' : 'https:';
-  return `${protocol}//${host}`;
-};
-
-Home.getInitialProps = async (prop: any) => {
-  const props = await new Promise(resolve => {
-    booksUISDK
-      .fetchBooks({ origin: getOrigin(prop.req) })
-      .then(books => resolve({ books, state: States.success }))
-      .catch(error => resolve({ error, books: [], state: States.failure }));
-
-    setTimeout(() => resolve({ books: [], state: States.loading }), 1000);
-  });
-
-  return props;
-};
-
-export default Home;
+export default withDataLoader(
+  req => booksUISDK.fetchBooks({ origin: getOrigin(req) }),
+  [],
+  1000
+)(Home);
