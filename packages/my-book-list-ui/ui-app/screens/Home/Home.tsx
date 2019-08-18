@@ -1,3 +1,5 @@
+import { defineMessages, useIntl } from 'react-intl';
+
 import Link from 'next/link';
 
 import Screen from '../../layouts/Screen';
@@ -44,17 +46,31 @@ import { IBook } from '../../../types';
 //   },
 // ];
 
+const messages = defineMessages({
+  search: {
+    id: 'home.search',
+    defaultMessage: 'Search by title, author or series',
+  },
+  title: {
+    id: 'home.title',
+    defaultMessage:
+      '{count, plural, =0 {No books added} one {# Book} other {# Books}}',
+  },
+});
+
 interface IHomeProps {
   payload: IBook[];
   state: States;
 }
 
 const Home = ({ payload, state }: IHomeProps) => {
+  const intl = useIntl();
+
   return (
     <Screen name="home">
       <Block>
         <div>
-          <SearchInput placeholder={'Search by title, author or series'} />
+          <SearchInput placeholder={intl.formatMessage(messages.search)} />
         </div>
         <span>
           <AddIcon />
@@ -63,7 +79,9 @@ const Home = ({ payload, state }: IHomeProps) => {
       {state === States.loading ? (
         <Spinner />
       ) : (
-        <Section title={`${payload.length} Books`}>
+        <Section
+          title={intl.formatMessage(messages.title, { count: payload.length })}
+        >
           {payload.map(book => (
             <Link href={`/books/${book.id}`} key={book.id}>
               <a className="book-layout">

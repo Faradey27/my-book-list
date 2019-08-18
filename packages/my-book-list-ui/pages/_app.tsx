@@ -1,4 +1,5 @@
 import App from 'next/app';
+import { IntlProvider } from 'react-intl';
 
 import sentry from '../ui-app/utils/sentry';
 
@@ -67,35 +68,39 @@ class MyApp extends App {
   }
 
   render() {
-    return (this.state as any).hasError ? (
-      <section>
-        <h1>There was an error!</h1>
-        <p>
-          <a
-            href="#"
-            onClick={() =>
-              (Sentry as any).showReportDialog({
-                eventId: (this.state as any).errorEventId,
-              })
-            }
-          >
-            📣 Report this error
-          </a>
-        </p>
-        <p>
-          <a
-            href="#"
-            onClick={() => {
-              window.location.reload(true);
-            }}
-          >
-            Or, try reloading the page
-          </a>
-        </p>
-      </section>
-    ) : (
-      // Render the normal Next.js page
-      super.render()
+    return (
+      <IntlProvider locale="en">
+        {(this.state as any).hasError ? (
+          <section>
+            <h1>There was an error!</h1>
+            <p>
+              <a
+                href="#"
+                onClick={() =>
+                  (Sentry as any).showReportDialog({
+                    eventId: (this.state as any).errorEventId,
+                  })
+                }
+              >
+                📣 Report this error
+              </a>
+            </p>
+            <p>
+              <a
+                href="#"
+                onClick={() => {
+                  window.location.reload(true);
+                }}
+              >
+                Or, try reloading the page
+              </a>
+            </p>
+          </section>
+        ) : (
+          // Render the normal Next.js page
+          super.render()
+        )}
+      </IntlProvider>
     );
   }
 }

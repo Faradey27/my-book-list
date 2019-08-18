@@ -25,6 +25,7 @@
     "@types/isomorphic-fetch": "0.0.35",
     "@types/node": "^12.7.1",
     "@types/react": "^16.9.1",
+    "@types/react-intl": "^3.0.0",
     "@types/webpack": "^4.32.1",
     "now": "^16.1.1",
     "prettier": "^1.18.2",
@@ -47,6 +48,7 @@
     "next-helpers": "^1.0.0",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
+    "react-intl": "^3.1.9",
     "sentry-testkit": "^3.0.2",
     "webpack": "^4.39.1"
   }
