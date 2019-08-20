@@ -1,24 +1,15 @@
-import { defineMessages, useIntl } from 'react-intl';
-
-import Link from 'next/link';
-
 import Screen from '../../layouts/Screen';
-import { theme } from '../../layouts/Screen/Screen';
-
-import AddIcon from '../../assets/icons/AddIcon';
-import Block from '../../components/Block';
-import BookCard from '../../components/BookCard';
-import SearchInput from '../../components/SearchInput';
-import Section from '../../components/Section';
-import Spinner from '../../components/Spinner';
 
 import booksUISDK from '../../../be-app/books/booksUISDK';
+import { IBook } from '../../../types';
 
 import withDataLoader, { States } from '../../hocs/withDataLoader';
 import { getOrigin } from '../../utils/reqUtils';
 
-import { IBook } from '../../../types';
-import Router from 'next/router';
+import ChooseBookToAddModal from '../../components/ChooseBookToAddModal';
+
+import Content from './components/Content';
+import Header from './components/Headet';
 
 // const books: IBook[] = [
 //   {
@@ -47,83 +38,17 @@ import Router from 'next/router';
 //   },
 // ];
 
-const messages = defineMessages({
-  search: {
-    id: 'home.search',
-    defaultMessage: 'Search by title, author or series',
-  },
-  title: {
-    id: 'home.title',
-    defaultMessage:
-      '{count, plural, =0 {No books added} one {# Book} other {# Books}}',
-  },
-});
-
 interface IHomeProps {
   payload: IBook[];
   state: States;
 }
 
 const Home = ({ payload, state }: IHomeProps) => {
-  const intl = useIntl();
-
   return (
     <Screen name="home">
-      <Block>
-        <div>
-          <SearchInput placeholder={intl.formatMessage(messages.search)} />
-        </div>
-        <span>
-          <AddIcon />
-        </span>
-      </Block>
-      {state === States.loading ? (
-        <Spinner />
-      ) : (
-        <Section
-          title={intl.formatMessage(messages.title, { count: payload.length })}
-        >
-          {payload.map(book => (
-            <Link
-              href="/books/[id]"
-              as={`/books/${book.id}`}
-              key={book.id}
-              shallow={true}
-            >
-              <a className="book-layout">
-                <BookCard {...book} />
-              </a>
-            </Link>
-          ))}
-        </Section>
-      )}
-      <style jsx>{`
-        div {
-          width: 100%;
-          margin-right: 16px;
-        }
-        span {
-          height: 30px;
-        }
-        span:before {
-          content: '';
-          position: absolute;
-          content: '';
-          top: 50%;
-          width: 42px;
-          height: 42px;
-          right: 10px;
-          transform: translateY(-50%);
-        }
-        span > :global(svg) {
-          width: 30px;
-          height: 30px;
-          fill: ${theme.colors.accentColor};
-        }
-        .book-layout {
-          margin-bottom: 20px;
-        }
-      `}</style>
+      <Header />
+      <Content payload={payload} state={state} />
+      {false && <ChooseBookToAddModal />}
     </Screen>
   );
 };
