@@ -1,9 +1,19 @@
+/* tslint:disable: no-var-requires */
+
 import App, { AppContext } from 'next/app';
 import { IntlProvider } from 'react-intl';
 
 import sentry from '../ui-app/utils/sentry';
 
 const { Sentry, captureException } = sentry();
+
+if (!Intl.PluralRules) {
+  require('intl-pluralrules');
+}
+
+if (!Intl.RelativeTimeFormat) {
+  require('@formatjs/intl-relativetimeformat/polyfill');
+}
 
 process.on('unhandledRejection', (err: any) => {
   console.error('CRITICAL SERVER ERROR', err); // tslint:disable-line

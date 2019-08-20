@@ -11,10 +11,11 @@ import { getOrigin } from '../../utils/reqUtils';
 
 import ChooseBookToAddModal from '../../components/ChooseBookToAddModal';
 
+import { WithRouterProps } from 'next/dist/client/with-router';
+import { withRouter } from 'next/router';
+import { useEffect } from 'react';
 import Content from './components/Content';
 import Header from './components/Header';
-import { withRouter } from 'next/dist/client/router';
-import { WithRouterProps } from 'next/dist/client/with-router';
 
 // const books: IBook[] = [
 //   {
@@ -49,6 +50,11 @@ interface IHomeProps extends WithRouterProps {
 }
 
 const Home: NextPage<IHomeProps> = ({ payload, state, router }: IHomeProps) => {
+  useEffect(() => {
+    if (!Intl.PluralRules) {
+      throw new Error('Missed Intl.PluralRules');
+    }
+  });
   return (
     <Screen name="home">
       <Header />
