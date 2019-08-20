@@ -9,7 +9,7 @@
     "lint": "tslint -c tslint.json -p tsconfig.json",
     "build": "next build",
     "start": "next start",
-    "deploy": "now"
+    "deploy": "now -e FIREBASE_API_KEY=@firebase_api_key -e SENTRY_DSN=@sentry_dsn"
   },
   "repository": {
     "type": "git",
