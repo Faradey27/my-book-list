@@ -49,6 +49,7 @@ interface IHomeProps extends WithRouterProps {
 }
 
 const Home: NextPage<IHomeProps> = ({ payload, state, router }: IHomeProps) => {
+  console.log(process.env.SENTRY_DSN);
   return (
     <Screen name="home">
       <Header />

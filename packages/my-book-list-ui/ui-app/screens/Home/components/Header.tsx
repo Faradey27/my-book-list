@@ -44,9 +44,9 @@ const Header = () => {
           position: absolute;
           content: '';
           top: 50%;
-          width: 42px;
-          height: 42px;
-          right: 10px;
+          width: 62px;
+          height: 62px;
+          right: 0px;
           transform: translateY(-50%);
         }
         .addIcon-layout > :global(svg) {
