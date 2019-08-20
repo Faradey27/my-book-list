@@ -1,4 +1,4 @@
-import App from 'next/app';
+import App, { AppContext } from 'next/app';
 import { IntlProvider } from 'react-intl';
 
 import sentry from '../ui-app/utils/sentry';
@@ -16,7 +16,7 @@ process.on('uncaughtException', err => {
 });
 
 class MyApp extends App {
-  static async getInitialProps({ Component, ctx }: any): Promise<any> {
+  static async getInitialProps({ Component, ctx }: AppContext): Promise<any> {
     try {
       let pageProps = {};
 

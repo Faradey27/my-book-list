@@ -1,7 +1,10 @@
+import { NextPage } from 'next';
+
 import Screen from '../../layouts/Screen';
 
 import booksUISDK from '../../../be-app/books/booksUISDK';
 import { IBook } from '../../../types';
+import { Modals } from '../../index.d';
 
 import withDataLoader, { States } from '../../hocs/withDataLoader';
 import { getOrigin } from '../../utils/reqUtils';
@@ -9,7 +12,9 @@ import { getOrigin } from '../../utils/reqUtils';
 import ChooseBookToAddModal from '../../components/ChooseBookToAddModal';
 
 import Content from './components/Content';
-import Header from './components/Headet';
+import Header from './components/Header';
+import { withRouter } from 'next/dist/client/router';
+import { WithRouterProps } from 'next/dist/client/with-router';
 
 // const books: IBook[] = [
 //   {
@@ -38,17 +43,19 @@ import Header from './components/Headet';
 //   },
 // ];
 
-interface IHomeProps {
+interface IHomeProps extends WithRouterProps {
   payload: IBook[];
   state: States;
 }
 
-const Home = ({ payload, state }: IHomeProps) => {
+const Home: NextPage<IHomeProps> = ({ payload, state, router }: IHomeProps) => {
   return (
     <Screen name="home">
       <Header />
       <Content payload={payload} state={state} />
-      {false && <ChooseBookToAddModal />}
+      <ChooseBookToAddModal
+        isOpen={router.query.modalType === Modals.ChooseBook}
+      />
     </Screen>
   );
 };
@@ -57,4 +64,4 @@ export default withDataLoader(
   req => booksUISDK.fetchBooks({ origin: getOrigin(req) }),
   [],
   1000
-)(Home);
+)(withRouter(Home));

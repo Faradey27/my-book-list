@@ -1,5 +1,8 @@
 import { useEffect, useReducer } from 'react';
 
+import { IncomingMessage } from 'http';
+import { NextPageContext } from 'next';
+
 export enum States {
   idle = 'idle',
   loading = 'loading',
@@ -45,7 +48,7 @@ const loaderReducer = (state: ILoaderState, action: ILoaderAction) => {
 };
 
 const withDataLoader = (
-  loader: (req?: any) => Promise<any>,
+  loader: (req?: IncomingMessage) => Promise<any>,
   defaultPayload?: any,
   maxSSRWaitTime: number = 200
 ) => <P extends object>(
@@ -70,7 +73,7 @@ const withDataLoader = (
     return <Component {...(state as P)} />;
   };
 
-  Loader.getInitialProps = async ({ req }: any) => {
+  Loader.getInitialProps = async ({ req }: NextPageContext) => {
     const isServer = Boolean(req);
     const props = await new Promise(resolve => {
       if (isServer) {

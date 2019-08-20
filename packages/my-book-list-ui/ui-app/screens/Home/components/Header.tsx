@@ -1,10 +1,14 @@
 import { defineMessages, useIntl } from 'react-intl';
 
+import Link from 'next/link';
+
 import AddIcon from '../../../assets/icons/AddIcon';
 import Block from '../../../components/Block';
 import SearchInput from '../../../components/SearchInput';
 
 import { theme } from '../../../layouts/Screen/Screen';
+
+import { Modals } from '../../../index.d';
 
 const messages = defineMessages({
   search: {
@@ -21,9 +25,11 @@ const Header = () => {
         <div className="search-layout">
           <SearchInput placeholder={intl.formatMessage(messages.search)} />
         </div>
-        <span className="addIcon-layout">
-          <AddIcon />
-        </span>
+        <Link href={{ query: { modalType: Modals.ChooseBook } }}>
+          <a className="addIcon-layout">
+            <AddIcon />
+          </a>
+        </Link>
       </Block>
       <style jsx>{`
         .search-layout {
