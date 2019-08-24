@@ -6,25 +6,30 @@ import SearchIcon from '../../assets/icons/SearchIcon';
 import { theme } from '../../layouts/Screen/Screen';
 
 interface ISearchInputProps {
+  value: string;
+  onSearchChange: (value: string) => void;
   placeholder?: string;
 }
 
-const SearchInput = ({ placeholder }: ISearchInputProps) => {
-  const [value, setValue] = useState('');
+const SearchInput = ({
+  placeholder,
+  value,
+  onSearchChange,
+}: ISearchInputProps) => {
   return (
     <div data-hook="searchInput-component" className="searchInput-component">
       <input
         id="search-input"
         placeholder={placeholder}
         value={value}
-        onChange={e => setValue(e.target.value)}
+        onChange={e => onSearchChange(e.target.value)}
       />
       <label htmlFor="search-input">
         <SearchIcon />
       </label>
       <span
         className={value ? 'clear-search-input' : 'clear-search-input-hide'}
-        onClick={() => setValue('')}
+        onClick={() => onSearchChange('')}
       >
         <CloseIcon />
       </span>

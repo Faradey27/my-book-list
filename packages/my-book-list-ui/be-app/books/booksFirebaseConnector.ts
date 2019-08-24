@@ -20,6 +20,7 @@ class Books {
 
   fetchBooks = async ({
     orderBy = 'name',
+    searchQuery = '',
     startAt = 0,
     limit = 10,
   }: IFetchBooks = {}) => {
@@ -30,7 +31,7 @@ class Books {
       .collection('books')
       .orderBy(orderBy)
       .startAt(Number(startAt))
-      .limit(Number(limit))
+      .limit(Number(100 || limit))
       .get();
 
     booksSnapshots.forEach(book => {
@@ -40,7 +41,13 @@ class Books {
       });
     });
 
-    return books;
+    return books.filter(book => {
+      if (!searchQuery) {
+        return true;
+      }
+
+      return book.name.includes(searchQuery);
+    });
   };
 }
 

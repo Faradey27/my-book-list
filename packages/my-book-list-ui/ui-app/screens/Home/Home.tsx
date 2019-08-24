@@ -13,7 +13,7 @@ import ChooseBookToAddModal from '../../components/ChooseBookToAddModal';
 
 import { WithRouterProps } from 'next/dist/client/with-router';
 import { withRouter } from 'next/router';
-import { useEffect } from 'react';
+import { useCallback, useState } from 'react';
 import Content from './components/Content';
 import Header from './components/Header';
 
@@ -50,14 +50,15 @@ interface IHomeProps extends WithRouterProps {
 }
 
 const Home: NextPage<IHomeProps> = ({ payload, state, router }: IHomeProps) => {
-  useEffect(() => {
-    if (!Intl.PluralRules) {
-      throw new Error('Missed Intl.PluralRules');
-    }
-  });
+  const [searchValue, setSearchValue] = useState('');
+  const handleSearchChange = useCallback(value => {
+    console.log(value);
+    setSearchValue(value);
+  }, []);
+
   return (
     <Screen name="home">
-      <Header />
+      <Header searchValue={searchValue} onSearchChange={handleSearchChange} />
       <Content payload={payload} state={state} />
       <ChooseBookToAddModal
         isOpen={router.query.modalType === Modals.ChooseBook}
@@ -66,8 +67,7 @@ const Home: NextPage<IHomeProps> = ({ payload, state, router }: IHomeProps) => {
   );
 };
 
-export default withDataLoader(
+export default withDataLoader()(
   req => booksUISDK.fetchBooks({ origin: getOrigin(req) }),
-  [],
-  1000
+  []
 )(withRouter(Home));

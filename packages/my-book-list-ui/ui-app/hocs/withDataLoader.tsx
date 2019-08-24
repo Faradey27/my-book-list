@@ -47,10 +47,10 @@ const loaderReducer = (state: ILoaderState, action: ILoaderAction) => {
   }
 };
 
-const withDataLoader = (
-  loader: (req?: IncomingMessage) => Promise<any>,
+const withDataLoader = (getTriggers: (props: any) => string[] = () => []) => (
+  loader: (req: IncomingMessage | null, props: any) => Promise<any>,
   defaultPayload?: any,
-  maxSSRWaitTime: number = 200
+  maxSSRWaitTime: number = 2000
 ) => <P extends object>(
   Component: React.ComponentType<P>
 ): React.FC<P & IWithDataLoadingProps> => {
@@ -59,7 +59,7 @@ const withDataLoader = (
 
     useEffect(() => {
       if (props.state === States.loading) {
-        loader()
+        loader(null, props)
           .then(payload => {
             dispatch({ type: Actions.SET_PAYLOAD, payload });
             dispatch({ type: Actions.SET_STATE, payload: States.success });
@@ -68,7 +68,7 @@ const withDataLoader = (
             dispatch({ type: Actions.SET_STATE, payload: States.failure })
           );
       }
-    }, []);
+    }, getTriggers(props));
 
     return <Component {...(state as P)} />;
   };
@@ -77,7 +77,7 @@ const withDataLoader = (
     const isServer = Boolean(req);
     const props = await new Promise(resolve => {
       if (isServer) {
-        loader(req)
+        loader(req || null, null)
           .then(payload => resolve({ payload, state: States.success }))
           .catch(error =>
             resolve({ error, payload: defaultPayload, state: States.failure })

@@ -1,41 +1,32 @@
-import { defineMessages, useIntl } from 'react-intl';
-
 import Link from 'next/link';
 
 import AddIcon from '../../../assets/icons/AddIcon';
-import Block from '../../../components/Block';
-import SearchInput from '../../../components/SearchInput';
+import SearchBlock from '../../../components/SearchBlock';
 
 import { theme } from '../../../layouts/Screen/Screen';
 
 import { Modals } from '../../../index.d';
 
-const messages = defineMessages({
-  search: {
-    id: 'home.search',
-    defaultMessage: 'Search by title, author or series',
-  },
-});
+interface IHeaderProps {
+  searchValue: string;
+  onSearchChange: (value: string) => void;
+}
 
-const Header = () => {
-  const intl = useIntl();
+const Header = ({ searchValue, onSearchChange }: IHeaderProps) => {
   return (
     <>
-      <Block>
-        <div className="search-layout">
-          <SearchInput placeholder={intl.formatMessage(messages.search)} />
-        </div>
-        <Link href={{ query: { modalType: Modals.ChooseBook } }}>
-          <a className="addIcon-layout">
-            <AddIcon />
-          </a>
-        </Link>
-      </Block>
-      <style jsx>{`
-        .search-layout {
-          width: 100%;
-          margin-right: 16px;
+      <SearchBlock
+        value={searchValue}
+        onSearchChange={onSearchChange}
+        rightPlaceholder={
+          <Link href={{ query: { modalType: Modals.ChooseBook } }}>
+            <a className="addIcon-layout">
+              <AddIcon />
+            </a>
+          </Link>
         }
+      />
+      <style jsx>{`
         .addIcon-layout {
           height: 30px;
         }

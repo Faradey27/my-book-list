@@ -16,6 +16,7 @@ export interface IBook {
 }
 
 export interface IFetchBooks {
+  searchQuery?: string;
   orderBy?: keyof IBook;
   startAt?: number;
   limit?: number;
