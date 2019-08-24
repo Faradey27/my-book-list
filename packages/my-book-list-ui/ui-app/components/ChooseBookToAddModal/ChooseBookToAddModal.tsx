@@ -1,12 +1,15 @@
 import classNames from 'classnames';
 import { useCallback, useState } from 'react';
 
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 
+import ArrowBackIcon from '../../assets/icons/ArrowBackIcon';
 import BooksSearchRecommendationsList from '../BooksSearchRecommendationsList';
 import SearchBlock from '../SearchBlock';
 
 import { States } from '../../hocs/withDataLoader';
+import { theme } from '../../layouts/Screen/Screen';
 
 interface IChooseBookToAddModalProps {
   isOpen: boolean;
@@ -34,7 +37,17 @@ const ChooseBookToAddModal = ({ isOpen }: IChooseBookToAddModalProps) => {
           ['opened']: isOpen,
         })}
       >
-        <SearchBlock value={searchValue} onSearchChange={handleSearchChange} />
+        <SearchBlock
+          value={searchValue}
+          onSearchChange={handleSearchChange}
+          leftPlaceholder={
+            <Link href={{ query: {} }}>
+              <a className="backButton-layout">
+                <ArrowBackIcon />
+              </a>
+            </Link>
+          }
+        />
         <BooksSearchRecommendationsList
           state={States.loading}
           payload={[]}
@@ -53,6 +66,24 @@ const ChooseBookToAddModal = ({ isOpen }: IChooseBookToAddModalProps) => {
         }
         .opened {
           transform: translateY(0);
+        }
+        .backButton-layout {
+          height: 30px;
+        }
+        .backButton-layout:before {
+          content: '';
+          position: absolute;
+          content: '';
+          top: 50%;
+          width: 62px;
+          height: 62px;
+          left: 0px;
+          transform: translateY(-50%);
+        }
+        .backButton-layout > :global(svg) {
+          width: 30px;
+          height: 30px;
+          fill: ${theme.colors.baseFontColor};
         }
       `}</style>
     </>

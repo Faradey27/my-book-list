@@ -14,17 +14,20 @@ interface ISearchBlockProps {
   value: string;
   onSearchChange: (value: string) => void;
   rightPlaceholder?: React.ReactNode;
+  leftPlaceholder?: React.ReactNode;
 }
 
 const SearchBlock = ({
   value,
   rightPlaceholder,
+  leftPlaceholder,
   onSearchChange,
 }: ISearchBlockProps) => {
   const intl = useIntl();
   return (
     <>
       <Block>
+        {leftPlaceholder}
         <div className="search-layout">
           <SearchInput
             placeholder={intl.formatMessage(messages.search)}
@@ -37,6 +40,7 @@ const SearchBlock = ({
       <style jsx>{`
         .search-layout {
           width: 100%;
+          margin-left: ${leftPlaceholder ? 16 : 0}px;
           margin-right: ${rightPlaceholder ? 16 : 0}px;
         }
       `}</style>
